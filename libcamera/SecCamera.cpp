@@ -1217,6 +1217,7 @@ int SecCamera::setSnapshotCmd(void)
 
     // Additional calls needed for CE147
 
+#ifndef M5MO_CAMERA
     // GPS
     ret = fimc_v4l2_s_ext_ctrl(m_cam_fd, V4L2_CID_CAMERA_GPS_LATITUDE, &gpsInfoLatitude);
     CHECK(ret);
@@ -1237,6 +1238,7 @@ int SecCamera::setSnapshotCmd(void)
     struct tm *timeinfo = localtime(&rawtime);
     ret = fimc_v4l2_s_ext_ctrl(m_cam_fd, V4L2_CID_CAMERA_EXIF_TIME_INFO, timeinfo);
     CHECK(ret);
+#endif
 
     // Orientation
     int orientation;
