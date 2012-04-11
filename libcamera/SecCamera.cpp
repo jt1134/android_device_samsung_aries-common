@@ -741,10 +741,14 @@ int SecCamera::startPreview(void)
     int ret = fimc_v4l2_enum_fmt(m_cam_fd,m_preview_v4lformat);
     CHECK(ret);
 
+#ifndef M5MO_CAMERA
     if (m_camera_id == CAMERA_ID_BACK)
+#endif
         ret = fimc_v4l2_s_fmt(m_cam_fd, m_preview_width,m_preview_height,m_preview_v4lformat, 0);
+#ifndef M5MO_CAMERA
     else
         ret = fimc_v4l2_s_fmt(m_cam_fd, m_preview_height,m_preview_width,m_preview_v4lformat, 0);
+#endif
     CHECK(ret);
 
     ret = fimc_v4l2_reqbufs(m_cam_fd, V4L2_BUF_TYPE_VIDEO_CAPTURE, MAX_BUFFERS);
@@ -834,6 +838,7 @@ int SecCamera::startPreview(void)
     ret = fimc_v4l2_s_parm(m_cam_fd, &m_streamparm);
     CHECK(ret);
 
+#ifndef M5MO_CAMERA
     if (m_camera_id == CAMERA_ID_FRONT) {
         /* Blur setting */
         LOGV("m_blur_level = %d", m_blur_level);
@@ -841,6 +846,7 @@ int SecCamera::startPreview(void)
                                m_blur_level);
         CHECK(ret);
     }
+#endif
 
     // It is a delay for a new frame, not to show the previous bigger ugly picture frame.
     ret = fimc_poll(&m_events_c);
@@ -905,19 +911,22 @@ int SecCamera::startRecord(void)
     LOGI("%s: m_recording_width = %d, m_recording_height = %d\n",
          __func__, m_recording_width, m_recording_height);
 
+#ifndef M5MO_CAMERA
     if (m_camera_id == CAMERA_ID_BACK) {
         // Some properties for back camera video recording
         setISO(ISO_MOVIE);
         setMetering(METERING_MATRIX);
         setBatchReflection();
-
+#endif
         ret = fimc_v4l2_s_fmt(m_cam_fd2, m_recording_width,
                               m_recording_height, V4L2_PIX_FMT_NV12T, 0);
+#ifndef M5MO_CAMERA
     }
     else {
         ret = fimc_v4l2_s_fmt(m_cam_fd2, m_recording_height,
                               m_recording_width, V4L2_PIX_FMT_NV12T, 0);
     }
+#endif
     CHECK(ret);
 
     ret = fimc_v4l2_s_ctrl(m_cam_fd, V4L2_CID_CAMERA_FRAME_RATE,
@@ -1494,7 +1503,11 @@ int SecCamera::getSnapshotAndJpeg(unsigned char *yuv_buf, unsigned char *jpeg_bu
     ret = fimc_v4l2_enum_fmt(m_cam_fd,m_snapshot_v4lformat);
     CHECK(ret);
     // FFC: Swap width and height
+#ifdef M5MO_CAMERA
+    ret = fimc_v4l2_s_fmt_cap(m_cam_fd, m_snapshot_width, m_snapshot_height, m_snapshot_v4lformat);
+#else
     ret = fimc_v4l2_s_fmt_cap(m_cam_fd, m_snapshot_height, m_snapshot_width, m_snapshot_v4lformat);
+#endif
     CHECK(ret);
     ret = fimc_v4l2_reqbufs(m_cam_fd, V4L2_BUF_TYPE_VIDEO_CAPTURE, nframe);
     CHECK(ret);
