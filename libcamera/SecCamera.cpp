@@ -1712,6 +1712,7 @@ int SecCamera::getAutoFocusResult(void)
 {
     int af_result, count, ret;
 
+#ifndef M5MO_CAMERA
     for (count = 0; count < FIRST_AF_SEARCH_COUNT; count++) {
         ret = fimc_v4l2_g_ctrl(m_cam_fd, V4L2_CID_CAMERA_AUTO_FOCUS_RESULT_FIRST);
         if (ret != AF_PROGRESS)
@@ -1733,6 +1734,9 @@ finish_auto_focus:
         LOGE("ERR(%s):Fail on V4L2_CID_CAMERA_FINISH_AUTO_FOCUS", __func__);
         return -1;
     }
+#else
+    af_result = fimc_v4l2_g_ctrl(m_cam_fd, V4L2_CID_CAMERA_AUTO_FOCUS_RESULT_FIRST);
+#endif
     return af_result;
 }
 
