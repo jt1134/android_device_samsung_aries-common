@@ -97,7 +97,11 @@ namespace android {
 #define S5K4ECGX_THUMBNAIL_BPP            16
 
 /* focal length of 3.43mm */
+#ifdef M5MO_CAMERA
+#define S5K4ECGX_FOCAL_LENGTH             393
+#else
 #define S5K4ECGX_FOCAL_LENGTH             343
+#endif
 
 #define VGA_PREVIEW_WIDTH               640
 #define VGA_PREVIEW_HEIGHT              480

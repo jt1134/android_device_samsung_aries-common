@@ -294,7 +294,11 @@ void CameraHardwareSec::initDefaultParameters(int cameraId)
         p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FPS_RANGE, "(15000,30000)");
         p.set(CameraParameters::KEY_PREVIEW_FPS_RANGE, "15000,30000");
 
+#ifdef M5MO_CAMERA
+        p.set(CameraParameters::KEY_FOCAL_LENGTH, "3.935");
+#else
         p.set(CameraParameters::KEY_FOCAL_LENGTH, "3.43");
+#endif
 
         // touch focus
         p.set(CameraParameters::KEY_MAX_NUM_FOCUS_AREAS, "1");
