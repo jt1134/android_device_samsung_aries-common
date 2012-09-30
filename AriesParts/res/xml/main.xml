@@ -90,4 +90,16 @@
                 android:persistent="true" />
         </PreferenceCategory>
 
+        <PreferenceCategory
+            android:title="@string/category_force_fast_charge_title"
+            android:key="category_force_fast_charge">
+            <!-- Fast Charge -->
+            <CheckBoxPreference
+                android:key="force_fast_charge"
+                android:title="@string/force_fast_charge_title_head"
+                android:summaryOn="@string/force_fast_charge_summary_on"
+                android:summaryOff="@string/force_fast_charge_summary_off"
+                android:persistent="true" />
+        </PreferenceCategory>
+
 </PreferenceScreen>

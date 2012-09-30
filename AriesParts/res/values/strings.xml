@@ -50,6 +50,11 @@
     <string name="deskdock_audio_summary_on">Desk dock audio enabled</string>
     <string name="deskdock_audio_summary_off">Desk dock audio disabled</string>
 
+    <string name="category_force_fast_charge_title">USB Charging</string>
+    <string name="force_fast_charge_title_head">Force fast charging</string>
+    <string name="force_fast_charge_summary_on">Fast charging enabled</string>
+    <string name="force_fast_charge_summary_off">Fast charging disabled</string>
+
     <!-- Used for activity title. Usually not visible, except on the
          multi-task screen -->
     <string name="generic_warning_title">Warning</string>

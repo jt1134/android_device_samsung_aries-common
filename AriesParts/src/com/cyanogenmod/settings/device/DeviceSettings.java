@@ -27,6 +27,8 @@ public class DeviceSettings extends PreferenceActivity  {
     public static final String KEY_CARDOCK_AUDIO = "cardock_audio";
     public static final String KEY_DESKDOCK_AUDIO = "deskdock_audio";
     public static final String KEY_DOCK_AUDIO_CATEGORY = "category_dock_audio";
+    public static final String KEY_FORCE_FAST_CHARGE = "force_fast_charge";
+    public static final String KEY_FORCE_FAST_CHARGE_CATEGORY = "category_force_fast_charge";
 
     private ColorTuningPreference mColorTuning;
     private ListPreference mMdnie;
@@ -38,6 +40,7 @@ public class DeviceSettings extends PreferenceActivity  {
     private VolumeBoostPreference mVolumeBoost;
     private CheckBoxPreference mCarDockAudio;
     private CheckBoxPreference mDeskDockAudio;
+    private CheckBoxPreference mForceFastCharge;
 
     private BroadcastReceiver mHeadsetReceiver = new BroadcastReceiver() {
 
@@ -90,6 +93,15 @@ public class DeviceSettings extends PreferenceActivity  {
             PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(KEY_DOCK_AUDIO_CATEGORY);
             category.removePreference(mCarDockAudio);
             category.removePreference(mDeskDockAudio);
+            getPreferenceScreen().removePreference(category);
+        }
+
+        mForceFastCharge = (CheckBoxPreference) findPreference(KEY_FORCE_FAST_CHARGE);
+        if (ForceFastCharge.isSupported()) {
+            mForceFastCharge.setOnPreferenceChangeListener(new ForceFastCharge());
+        } else {
+            PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(KEY_FORCE_FAST_CHARGE_CATEGORY);
+            category.removePreference(mForceFastCharge);
             getPreferenceScreen().removePreference(category);
         }
 
