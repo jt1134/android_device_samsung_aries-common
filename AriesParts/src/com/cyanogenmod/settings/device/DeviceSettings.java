@@ -29,6 +29,7 @@ public class DeviceSettings extends PreferenceActivity  {
     public static final String KEY_DOCK_AUDIO_CATEGORY = "category_dock_audio";
     public static final String KEY_FORCE_FAST_CHARGE = "force_fast_charge";
     public static final String KEY_FORCE_FAST_CHARGE_CATEGORY = "category_force_fast_charge";
+    public static final String KEY_VIBRATION = "vibration";
 
     private ColorTuningPreference mColorTuning;
     private ListPreference mMdnie;
@@ -41,6 +42,7 @@ public class DeviceSettings extends PreferenceActivity  {
     private CheckBoxPreference mCarDockAudio;
     private CheckBoxPreference mDeskDockAudio;
     private CheckBoxPreference mForceFastCharge;
+    private VibrationPreference mVibration;
 
     private BroadcastReceiver mHeadsetReceiver = new BroadcastReceiver() {
 
@@ -104,6 +106,9 @@ public class DeviceSettings extends PreferenceActivity  {
             category.removePreference(mForceFastCharge);
             getPreferenceScreen().removePreference(category);
         }
+
+        mVibration = (VibrationPreference) findPreference(KEY_VIBRATION);
+        mVibration.setEnabled(VibrationPreference.isSupported());
 
         mTvOut = new TvOut();
         mTvOutEnable = (CheckBoxPreference) findPreference(KEY_TVOUT_ENABLE);

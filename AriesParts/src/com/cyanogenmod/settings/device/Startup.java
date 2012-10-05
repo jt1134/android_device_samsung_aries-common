@@ -16,6 +16,7 @@ public class Startup extends BroadcastReceiver {
         DockAudio.restore(context);
         Sanity.check(context);
         ForceFastCharge.restore(context);
+        VibrationPreference.restore(context);
     }
 
 }
