@@ -28,6 +28,8 @@ public class DeviceSettings extends PreferenceActivity  {
     public static final String KEY_DESKDOCK_AUDIO = "deskdock_audio";
     public static final String KEY_DOCK_AUDIO_CATEGORY = "category_dock_audio";
     public static final String KEY_VIBRATION = "vibration";
+    public static final String KEY_FORCE_FAST_CHARGE = "force_fast_charge";
+    public static final String KEY_FORCE_FAST_CHARGE_CATEGORY = "category_force_fast_charge";
 
     private ColorTuningPreference mColorTuning;
     private ListPreference mMdnie;
@@ -40,6 +42,7 @@ public class DeviceSettings extends PreferenceActivity  {
     private CheckBoxPreference mCarDockAudio;
     private CheckBoxPreference mDeskDockAudio;
     private VibrationPreference mVibration;
+    private CheckBoxPreference mForceFastCharge;
 
     private BroadcastReceiver mHeadsetReceiver = new BroadcastReceiver() {
 
@@ -97,6 +100,15 @@ public class DeviceSettings extends PreferenceActivity  {
 
         mVibration = (VibrationPreference) findPreference(KEY_VIBRATION);
         mVibration.setEnabled(VibrationPreference.isSupported());
+
+        mForceFastCharge = (CheckBoxPreference) findPreference(KEY_FORCE_FAST_CHARGE);
+        if (ForceFastCharge.isSupported()) {
+            mForceFastCharge.setOnPreferenceChangeListener(new ForceFastCharge());
+        } else {
+            PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(KEY_FORCE_FAST_CHARGE_CATEGORY);
+            category.removePreference(mForceFastCharge);
+            getPreferenceScreen().removePreference(category);
+        }
 
         mTvOut = new TvOut();
         mTvOutEnable = (CheckBoxPreference) findPreference(KEY_TVOUT_ENABLE);

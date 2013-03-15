@@ -67,4 +67,9 @@
     <string name="imei_not_sane_message">A problem was detected with your device. Your device IMEI number is invalid. An invalid IMEI number could cause network issues including the inability to call emergency numbers.</string>
     <string name="imei_not_sane_ok">OK</string>
 
+    <!-- Fast USB charging -->
+    <string name="category_force_fast_charge_title">USB Charging</string>
+    <string name="force_fast_charge_title_head">Force fast charging</string>
+    <string name="force_fast_charge_summary_on">Fast charging enabled</string>
+    <string name="force_fast_charge_summary_off">Fast charging disabled</string>
 </resources>

@@ -99,4 +99,15 @@
                 android:summary="@string/vibration_summary_head" />
          </PreferenceCategory>
 
+        <PreferenceCategory
+            android:title="@string/category_force_fast_charge_title"
+            android:key="category_force_fast_charge">
+            <!-- Fast charge -->
+            <CheckBoxPreference
+                android:key="force_fast_charge"
+                android:title="@string/force_fast_charge_title_head"
+                android:summaryOn="@string/force_fast_charge_summary_on"
+                android:summaryOff="@string/force_fast_charge_summary_off" />
+         </PreferenceCategory>
+
 </PreferenceScreen>
