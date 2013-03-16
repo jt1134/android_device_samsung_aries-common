@@ -104,6 +104,7 @@ public class DeviceSettings extends PreferenceActivity  {
         mForceFastCharge = (CheckBoxPreference) findPreference(KEY_FORCE_FAST_CHARGE);
         if (ForceFastCharge.isSupported()) {
             mForceFastCharge.setOnPreferenceChangeListener(new ForceFastCharge());
+            mForceFastCharge.setChecked(ForceFastCharge.isEnabled());
         } else {
             PreferenceCategory category = (PreferenceCategory) getPreferenceScreen().findPreference(KEY_FORCE_FAST_CHARGE_CATEGORY);
             category.removePreference(mForceFastCharge);

@@ -7,13 +7,20 @@ public class ForceFastCharge implements OnPreferenceChangeListener {
 
     private static final String FILE = "/sys/kernel/fast_charge/force_fast_charge";
 
+    private static boolean enabled = false;
+
+    public static boolean isEnabled() {
+        return enabled;
+    }
+
     public static boolean isSupported() {
         return Utils.fileExists(FILE);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Utils.writeValue(FILE, ((Boolean) newValue) ? "1" : "0");
+        enabled = (Boolean) newValue;
+        Utils.writeValue(FILE, enabled ? "1" : "0");
         return true;
     }
 
